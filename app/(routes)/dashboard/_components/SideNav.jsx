@@ -10,7 +10,7 @@ function SideNav() {
   const menuList = [
     { id: 1, name: "Dashboard", icon: LayoutGrid, path: "/dashboard" },
     { id: 2, name: "Budgets", icon: PiggyBank, path: "/dashboard/budgets" },
-    { id: 3, name: "Expense", icon: ReceiptText, path: "/dashboard/expense" },
+    { id: 3, name: "Expenses", icon: ReceiptText, path: "/dashboard/expensesScreen" },
     { id: 4, name: "Upgrade", icon: ShieldCheck, path: "/dashboard/upgrade" },
   ];
 
