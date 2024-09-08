@@ -26,16 +26,15 @@ function SideNav() {
 
       <div>
         {menuList.map((menu) => (
-          <Link href={menu.path}>
-            <h2
-              key={menu.id} // Use unique key
-              className={`gap-2 mb-2 flex font-medium items-center text-gray-600 p-5 cursor-pointer rounded-md hover:text-primary hover:bg-blue-200 ${
-                path === menu.path ? "text-primary bg-blue-100" : ""
-              }`}
-            >
-              <menu.icon /> {/* Render the icon */}
-              {menu.name}
-            </h2>
+          <Link
+            key={menu.id}
+            href={menu.path}
+            className={`gap-2 mb-2 flex font-medium items-center text-gray-600 p-5 cursor-pointer rounded-md hover:text-primary hover:bg-blue-200 ${
+              path === menu.path ? "text-primary bg-blue-100" : ""
+            }`}
+          >
+            <menu.icon /> {/* Render the icon */}
+            {menu.name}
           </Link>
         ))}
       </div>
