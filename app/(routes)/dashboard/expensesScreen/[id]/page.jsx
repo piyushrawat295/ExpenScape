@@ -1,18 +1,20 @@
 "use client";
 
 import { db } from "@/utils/dbConfig";
-import { eq, getTableColumns, sql } from "drizzle-orm";
+import { desc, eq, getTableColumns, sql } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { Budgets, Expenses } from "@/utils/schema";
 import { useParams } from "next/navigation"; // for dynamic route
 import BudgetItem from "../../budgets/_components/BudgetItem";
 import AddExpense from "../_components/AddExpense";
+import ExpenseList from "../_components/ExpenseList";
 
 function ExpensesScreen() {
   const { user, isLoaded } = useUser();
   const { id } = useParams(); // Access route parameter
   const [budgetData, setBudgetData] = useState(null);
+  const [expensesList, setExpensesList] = useState([]);
 
   useEffect(() => {
     if (isLoaded && user) {
@@ -32,8 +34,19 @@ function ExpensesScreen() {
       .where(eq(Budgets.createdBy, user.primaryEmailAddress?.emailAddress)) // Ensure user data is available
       .where(eq(Budgets.id, id)) // Use id from URL params
       .groupBy(Budgets.id);
+    geExpensesList();
 
     setBudgetData(result[0]);
+  };
+
+  const geExpensesList = async () => {
+    const result = await db
+      .select()
+      .from(Expenses)
+      .where(eq(Expenses.budgetId, id))
+      .orderBy(Expenses.createdAt, 'desc');
+
+    setExpensesList(result);
   };
 
   return (
@@ -46,6 +59,10 @@ function ExpensesScreen() {
           <div className="height-[150px] w-full bg-slate-200 rounded-lg animate-pulse"></div>
         )}
         <AddExpense budgetId={id} user={user} refreshData={getBudgetInfo} />
+      </div>
+      <div className="mt-4">
+        <h2 className="font-bold text-lg">Latest Expenses</h2>
+        <ExpenseList expensesList={expensesList}  refreshData={()=>getBudgetInfo()}/>
       </div>
     </div>
   );

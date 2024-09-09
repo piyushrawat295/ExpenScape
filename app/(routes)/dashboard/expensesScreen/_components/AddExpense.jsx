@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { db } from "@/utils/dbConfig";
 import { Expenses } from "@/utils/schema";
+import moment from "moment";
 import React, { useState } from "react";
 
 function AddExpense({ budgetId, user, refreshData }) {
@@ -17,7 +18,7 @@ function AddExpense({ budgetId, user, refreshData }) {
           name: name,
           amount: parseFloat(amount),
           budgetId: budgetId,
-          createdAt: new Date().toISOString(), // Add current timestamp for createdAt
+          createdAt: moment().format('DD/MM/YYYY,h:mm A'), // Add current timestamp for createdAt
           createdBy: user.primaryEmailAddress?.emailAddress, // Assuming this is the user identifier
         })
         .returning({ insertedId: Expenses.id });
