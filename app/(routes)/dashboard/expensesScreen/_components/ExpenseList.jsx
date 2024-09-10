@@ -36,8 +36,7 @@ function ExpenseList({expensesList,refreshData}) {
             <h2>{expenses.amount}</h2>
             <h2>{expenses.createdAt}</h2>
             <h2>
-              <Trash className=" cursor-pointer text-red-300" onClick={()=>deleteExpense(expenses)}/>
-                
+              <Trash className=" cursor-pointer text-red-300" onClick={()=>deleteExpense(expenses)}/>          
             </h2>
           </div>
         ))
