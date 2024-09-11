@@ -23,6 +23,9 @@ function AddExpense({ budgetId, user, refreshData }) {
         })
         .returning({ insertedId: Expenses.id });
 
+        setAmount('')
+        setName('')
+
       if (result) {
         refreshData(); // Refresh the data after adding expense
         toast({
