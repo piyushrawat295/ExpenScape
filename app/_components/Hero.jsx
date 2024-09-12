@@ -98,7 +98,7 @@ function Hero() {
       </div>
 
       {/* CTA Section with Parallax Effect */}
-      <div className="py-32 bg-fixed bg-cover bg-center" style={{ backgroundImage: "url('./parallex.avif')" }}>
+      <div className="py-32 bg-fixed bg-cover bg-center" style={{ backgroundImage: "url('./para2.avif')" }}>
         <div className="container mx-auto text-center text-white">
           <motion.h2
             className="text-4xl font-bold mb-4"
